@@ -6,14 +6,14 @@ public class addLocation {
     private double longitude;
     private String title;
     private String description;
-    private Boolean isStar;
+    private Boolean star;
 
-    public addLocation(double latitude, double longitude, String title, String description, Boolean isStar) {
+    public addLocation(double latitude, double longitude, String title, String description, Boolean star) {
         this.latitude = latitude;
         this.longitude = longitude;
         this.title = title;
         this.description = description;
-        this.isStar = isStar;
+        this.star = star;
     }
 
     public addLocation() {
@@ -39,13 +39,6 @@ public class addLocation {
         this.description = description;
     }
 
-    public Boolean getStar() {
-        return isStar;
-    }
-
-    public void setStar(Boolean star) {
-        isStar = star;
-    }
 
     public String getId() {
         return id;
@@ -53,5 +46,13 @@ public class addLocation {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public Boolean getStar() {
+        return star;
+    }
+
+    public void setStar(Boolean star) {
+        this.star = star;
     }
 }
