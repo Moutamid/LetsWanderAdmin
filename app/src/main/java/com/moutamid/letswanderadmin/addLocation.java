@@ -1,7 +1,7 @@
 package com.moutamid.letswanderadmin;
 
 public class addLocation {
-    private String markerId;
+    private String id;
     private double latitude;
     private double longitude;
     private String title;
@@ -14,6 +14,9 @@ public class addLocation {
         this.title = title;
         this.description = description;
         this.isStar = isStar;
+    }
+
+    public addLocation() {
     }
 
     public double getLatitude() {
@@ -44,11 +47,11 @@ public class addLocation {
         isStar = star;
     }
 
-    public String getMarkerId() {
-        return markerId;
+    public String getId() {
+        return id;
     }
 
-    public void setMarkerId(String markerId) {
-        this.markerId = markerId;
+    public void setId(String id) {
+        this.id = id;
     }
 }
