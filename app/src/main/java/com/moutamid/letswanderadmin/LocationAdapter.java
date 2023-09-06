@@ -8,6 +8,7 @@
     import android.view.View;
     import android.view.ViewGroup;
     import android.widget.Button;
+    import android.widget.ImageView;
     import android.widget.TextView;
     import android.widget.Toast;
 
@@ -45,16 +46,12 @@
             holder.descriptionTextView.setText("Description: " + location.getDescription());
 
             if (location.getStar() != null && location.getStar()) {
-                holder.isStarTextView.setText("Star");
-            } else {
-                holder.isStarTextView.setText("Not Star");
+                holder.starIcon.setVisibility(View.VISIBLE);
             }
 
             holder.editButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Log.d("LocationAdapter", "Edit button clicked");
-                    Log.d("LocationAdapter", "Edit button clicked with ID: " + location.getId());
                     Intent intent = new Intent(context, EditActivity.class);
                     intent.putExtra("id", location.getId());
                     context.startActivity(intent);
@@ -106,7 +103,7 @@
             private TextView titleTextView;
             private TextView locationTextView;
             private TextView descriptionTextView;
-            private TextView isStarTextView;
+            private ImageView starIcon;
             private Button editButton;
             private Button deleteButton;
 
@@ -116,7 +113,7 @@
                 titleTextView = itemView.findViewById(R.id.textViewTitle);
                 locationTextView = itemView.findViewById(R.id.textViewLocation);
                 descriptionTextView = itemView.findViewById(R.id.textViewDescription);
-                isStarTextView = itemView.findViewById(R.id.textViewIsStar);
+                starIcon = itemView.findViewById(R.id.starIcon);
                 editButton = itemView.findViewById(R.id.editLocationButton);
                 deleteButton = itemView.findViewById(R.id.deleteLocationButton);
             }

@@ -10,13 +10,15 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/primary">
+        android:background="@color/primary"
+        android:layout_gravity="top">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginLeft="8dp"
             android:text="Add New Location"
+            android:fontFamily="@font/poppins"
             android:textColor="@color/black"
             android:textSize="20sp"
             android:textStyle="bold" />
@@ -29,109 +31,141 @@
         android:padding="16dp"
         android:layout_below="@id/toolbar">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Title"
-        android:textSize="18sp"
-        android:textColor="@color/black"
-        android:layout_marginTop="8dp" />
-
-    <EditText
-        android:id="@+id/editTextTitle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Enter title"
-        android:inputType="text"
-        android:minHeight="48dp"
-        android:textColorHint="#8D6E63"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="16dp" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Location (Latitude, Longitude)"
-        android:textSize="18sp"
-        android:textColor="@color/black"
-        android:layout_marginTop="16dp" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        <!-- Title -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Title"
+            android:fontFamily="@font/roboto"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:textColor="@color/black"
+            android:layout_gravity="start"
+            android:layout_marginTop="8dp" />
 
         <EditText
-            android:id="@+id/editTextLatitude"
-            android:layout_width="0dp"
+            android:id="@+id/editTextTitle"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:hint="Latitude"
-            android:inputType="numberDecimal"
+            android:hint="Enter title"
+            android:inputType="text"
+            android:background="@color/secondary"
             android:minHeight="48dp"
             android:textColorHint="#8D6E63"
-            android:layout_marginEnd="8dp" />
+            android:layout_marginBottom="16dp" />
+
+        <!-- Location -->
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:layout_marginTop="16dp"
+            android:text="Location"
+            android:textStyle="bold"
+            android:fontFamily="@font/roboto"
+            android:textColor="@color/black"
+            android:textSize="18sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="16dp"
+            android:layout_gravity="start">
+
+            <EditText
+                android:id="@+id/editTextLatitude"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="Latitude"
+                android:background="@color/secondary"
+                android:inputType="numberDecimal"
+                android:minHeight="48dp"
+                android:textColorHint="#8D6E63"
+                android:layout_marginEnd="8dp" />
+
+            <EditText
+                android:id="@+id/editTextLongitude"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="Longitude"
+                android:background="@color/secondary"
+                android:inputType="numberDecimal"
+                android:minHeight="48dp"
+                android:textColorHint="#8D6E63"
+                android:layout_marginStart="8dp" />
+        </LinearLayout>
+
+        <!-- Description -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Description"
+            android:fontFamily="@font/roboto"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:textColor="@color/black"
+            android:layout_gravity="start"
+            android:layout_marginTop="16dp" />
 
         <EditText
-            android:id="@+id/editTextLongitude"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:hint="Longitude"
-            android:inputType="numberDecimal"
-            android:minHeight="48dp"
+            android:id="@+id/editTextDescription"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:hint="Enter description"
+            android:background="@color/secondary"
+            android:textSize="12sp"
+            android:scrollbars="vertical"
+            android:inputType="textMultiLine"
+            android:minLines="3"
             android:textColorHint="#8D6E63"
-            android:layout_marginStart="8dp" />
-    </LinearLayout>
+            android:layout_marginBottom="16dp" />
 
-    <!-- Description -->
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Description"
-        android:textSize="18sp"
-        android:textColor="@color/black"
-        android:layout_marginTop="16dp" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            android:background="@color/secondary"
+            android:gravity="start">
 
-    <EditText
-        android:id="@+id/editTextDescription"
-        android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:hint="Enter description"
-        android:textSize="12sp"
-        android:scrollbars="vertical"
-        android:inputType="textMultiLine"
-        android:minLines="3"
-        android:textColorHint="#8D6E63"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="16dp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Is Star?"
+                android:fontFamily="@font/roboto"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:textColor="@color/black"
+                android:id="@+id/textViewIsStar"
+                android:layout_centerVertical="true"
+                android:layout_alignParentStart="true" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Is Star"
-        android:textSize="18sp"
-        android:textColor="@color/black"
-        android:layout_marginTop="16dp" />
+            <Switch
+                android:id="@+id/switchIsStar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="false"
+                android:minWidth="48dp"
+                android:background="@color/secondary"
+                android:minHeight="48dp"
+                tools:ignore="UseSwitchCompatOrMaterialXml"
+                android:layout_centerVertical="true"
+                android:layout_alignParentEnd="true" />
+        </RelativeLayout>
 
-    <Switch
-        android:id="@+id/switchIsStar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:checked="false"
-        android:minWidth="48dp"
-        android:minHeight="48dp"
-        tools:ignore="UseSwitchCompatOrMaterialXml"
-        android:layout_marginBottom="16dp" />
-
-    <Button
-        android:id="@+id/submitButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Submit"
-        android:textAllCaps="true"
-        android:backgroundTint="@color/primary"
-        android:textColor="@color/black"
-        android:layout_marginTop="20dp" />
+        <Button
+            android:id="@+id/submitButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Submit"
+            android:fontFamily="@font/roboto"
+            android:textAllCaps="true"
+            android:backgroundTint="@color/primary"
+            android:textColor="@color/black"
+            android:layout_marginTop="16dp" />
     </LinearLayout>
 </RelativeLayout>

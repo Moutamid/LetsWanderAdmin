@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -17,6 +16,7 @@
             android:layout_marginStart="8dp"
             android:layout_marginLeft="8dp"
             android:text="Edit Location"
+            android:fontFamily="@font/poppins"
             android:textColor="@color/black"
             android:textSize="20dp"
             android:textStyle="bold" />
@@ -29,11 +29,14 @@
         android:padding="16dp"
         android:layout_below="@id/toolbar">
 
+        <!-- Title -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Title"
             android:textSize="18sp"
+            android:fontFamily="@font/roboto"
+            android:textStyle="bold"
             android:textColor="@color/black"
             android:layout_marginTop="8dp" />
 
@@ -43,23 +46,31 @@
             android:layout_height="wrap_content"
             android:hint="Enter title"
             android:inputType="text"
+            android:background="@color/secondary"
+            android:paddingStart="8dp"
             android:minHeight="48dp"
             android:textColorHint="#8D6E63"
-            android:layout_marginTop="8dp"
             android:layout_marginBottom="16dp" />
+
+        <!-- Location -->
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Location (Latitude, Longitude)"
+            android:layout_gravity="start"
+            android:layout_marginTop="16dp"
+            android:text="Location"
+            android:fontFamily="@font/roboto"
+            android:textStyle="bold"
             android:textSize="18sp"
-            android:textColor="@color/black"
-            android:layout_marginTop="16dp" />
+            android:textColor="@color/black" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:layout_marginBottom="16dp"
+            android:layout_gravity="start">
 
             <EditText
                 android:id="@+id/editTextLatitude"
@@ -67,6 +78,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:hint="Latitude"
+                android:paddingStart="8dp"
+                android:background="@color/secondary"
                 android:inputType="numberDecimal"
                 android:minHeight="48dp"
                 android:textColorHint="#8D6E63"
@@ -78,6 +91,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:hint="Longitude"
+                android:paddingStart="8dp"
+                android:background="@color/secondary"
                 android:inputType="numberDecimal"
                 android:minHeight="48dp"
                 android:textColorHint="#8D6E63"
@@ -90,6 +105,8 @@
             android:layout_height="wrap_content"
             android:text="Description"
             android:textSize="18sp"
+            android:fontFamily="@font/roboto"
+            android:textStyle="bold"
             android:textColor="@color/black"
             android:layout_marginTop="16dp" />
 
@@ -98,40 +115,58 @@
             android:layout_width="match_parent"
             android:layout_height="150dp"
             android:hint="Enter description"
+            android:background="@color/secondary"
             android:textSize="12sp"
             android:scrollbars="vertical"
             android:inputType="textMultiLine"
+            android:paddingStart="8dp"
             android:minLines="3"
             android:textColorHint="#8D6E63"
-            android:layout_marginTop="8dp"
             android:layout_marginBottom="16dp" />
 
-        <TextView
-            android:layout_width="wrap_content"
+        <RelativeLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Is Star"
-            android:textSize="18sp"
-            android:textColor="@color/black"
-            android:layout_marginTop="16dp" />
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            android:background="@color/secondary"
+            android:gravity="start">
 
-        <Switch
-            android:id="@+id/switchIsStar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:checked="false"
-            android:minWidth="48dp"
-            android:minHeight="48dp"
-            tools:ignore="UseSwitchCompatOrMaterialXml"
-            android:layout_marginBottom="16dp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Is Star?"
+                android:fontFamily="@font/roboto"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:textColor="@color/black"
+                android:id="@+id/textViewIsStar"
+                android:layout_centerVertical="true"
+                android:layout_alignParentStart="true" />
+
+            <Switch
+                android:id="@+id/switchIsStar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="false"
+                android:minWidth="48dp"
+                android:background="@color/secondary"
+                android:minHeight="48dp"
+                tools:ignore="UseSwitchCompatOrMaterialXml"
+                android:layout_centerVertical="true"
+                android:layout_alignParentEnd="true" />
+        </RelativeLayout>
 
         <Button
             android:id="@+id/submitButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:backgroundTint="@color/primary"
+            android:fontFamily="@font/roboto"
             android:text="Save Changes"
             android:textAllCaps="true"
-            android:backgroundTint="@color/primary"
-            android:textColor="@color/black"
-            android:layout_marginTop="20dp" />
+            android:textColor="@color/black" />
+
     </LinearLayout>
 </RelativeLayout>
