@@ -1,0 +1,119 @@
+package com.moutamid.letswanderadmin;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Switch;
+import android.widget.Toast;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.ValueEventListener;
+import com.moutamid.letswanderadmin.Constants;
+
+public class EditActivity extends AppCompatActivity {
+
+    private EditText editTextTitle, editTextLatitude, editTextLongitude, editTextDescription;
+    private Switch switchIsStar;
+    private Button submitButton;
+
+    private String id;
+
+    private addLocation originalLocationData;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_edit);
+
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            id = extras.getString("id");
+            Log.d("EditActivity", "Received id from intent: " + id);
+        }
+        else {
+            Log.e("EditActivity", "Intent extras are null");
+        }
+
+        editTextTitle = findViewById(R.id.editTextTitle);
+        editTextLatitude = findViewById(R.id.editTextLatitude);
+        editTextLongitude = findViewById(R.id.editTextLongitude);
+        editTextDescription = findViewById(R.id.editTextDescription);
+        switchIsStar = findViewById(R.id.switchIsStar);
+        submitButton = findViewById(R.id.submitButton);
+
+        DatabaseReference locationRef = Constants.databaseReference().child("Markers").child(id);
+        locationRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    originalLocationData = dataSnapshot.getValue(addLocation.class);
+
+                    editTextTitle.setText(originalLocationData.getTitle());
+                    editTextLatitude.setText(String.valueOf(originalLocationData.getLatitude()));
+                    editTextLongitude.setText(String.valueOf(originalLocationData.getLongitude()));
+                    editTextDescription.setText(originalLocationData.getDescription());
+                    Boolean starValue = originalLocationData.getStar();
+                    if (starValue != null) {
+                        switchIsStar.setChecked(starValue.booleanValue());
+                    } else {
+                        switchIsStar.setChecked(false);
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Toast.makeText(EditActivity.this, "Error Fetching Data", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        submitButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String title = editTextTitle.getText().toString().trim();
+                String latitudeStr = editTextLatitude.getText().toString().trim();
+                String longitudeStr = editTextLongitude.getText().toString().trim();
+                String description = editTextDescription.getText().toString().trim();
+                boolean star = switchIsStar.isChecked(); // Get the state of the switch
+
+                if (originalLocationData != null
+                        && title.equals(originalLocationData.getTitle())
+                        && latitudeStr.equals(String.valueOf(originalLocationData.getLatitude()))
+                        && longitudeStr.equals(String.valueOf(originalLocationData.getLongitude()))
+                        && description.equals(originalLocationData.getDescription())
+                        && (star == originalLocationData.getStar().booleanValue())) {
+                    Toast.makeText(EditActivity.this, "No changes made", Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(EditActivity.this, ViewActivity.class));
+                }
+
+                if (title.isEmpty() || latitudeStr.isEmpty() || longitudeStr.isEmpty() || description.isEmpty()) {
+                    Toast.makeText(EditActivity.this, "Please fill in all fields", Toast.LENGTH_SHORT).show();
+                } else {
+                    try {
+                        double latitude = Double.parseDouble(latitudeStr);
+                        double longitude = Double.parseDouble(longitudeStr);
+
+                        DatabaseReference locationRef = Constants.databaseReference().child("Markers").child(id);
+
+                        locationRef.child("title").setValue(title);
+                        locationRef.child("latitude").setValue(latitude);
+                        locationRef.child("longitude").setValue(longitude);
+                        locationRef.child("description").setValue(description);
+                        locationRef.child("star").setValue(star); // Update the "isStar" field in Firebase
+
+                        Toast.makeText(EditActivity.this, "Changes saved successfully", Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(EditActivity.this, ViewActivity.class));
+                    } catch (NumberFormatException e) {
+                        Toast.makeText(EditActivity.this, "Invalid latitude or longitude format", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            }
+        });
+    }
+}

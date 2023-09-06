@@ -1,0 +1,101 @@
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/border_background"
+    android:clickable="false"
+    android:foreground="?android:attr/selectableItemBackground"
+    app:cardCornerRadius="8dp"
+    app:cardElevation="4dp"
+    app:cardUseCompatPadding="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="6dp">
+
+    <TextView
+        android:id="@+id/textViewTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Title"
+        android:textSize="18sp"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="16dp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginVertical="4dp"
+            android:background="#cccccc" />
+
+    <TextView
+        android:id="@+id/textViewLocation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Location"
+        android:layout_below="@id/textViewTitle"
+        android:textColor="@color/black"
+        android:layout_marginTop="8dp" />
+
+    <TextView
+        android:id="@+id/textViewDescription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Description"
+        android:textSize="12dp"
+        android:layout_below="@id/textViewLocation"
+        android:textColor="#686868"
+        android:layout_marginTop="8dp" />
+
+    <TextView
+        android:id="@+id/textViewIsStar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Not Star"
+        android:layout_below="@id/textViewDescription"
+        android:textColor="@color/black"
+        android:layout_marginTop="8dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/editLocationButton"
+            android:layout_width="0dp"
+            android:layout_height="45dp"
+            android:layout_weight="0.75"
+            android:onClick="onEditLocationClick"
+            android:clickable="true"
+            android:backgroundTint="@color/primary"
+            android:textColor="@color/black"
+            android:layout_marginTop="8dp"
+            android:text="Edit Location"
+            android:focusable="true" />
+
+        <Button
+            android:id="@+id/deleteLocationButton"
+            android:layout_width="0dp"
+            android:layout_height="45dp"
+            android:layout_marginTop="8dp"
+            android:layout_weight="0.75"
+            android:text="Delete Location"
+            android:backgroundTint="@color/primary"
+            android:textColor="@color/black"
+            android:clickable="true"
+            android:layout_marginStart="10dp"
+            android:focusable="true" />
+    </LinearLayout>
+</LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/darker_gray" />
+
+</androidx.cardview.widget.CardView>
