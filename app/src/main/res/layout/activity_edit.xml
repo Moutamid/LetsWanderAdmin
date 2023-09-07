@@ -120,7 +120,6 @@
             android:scrollbars="vertical"
             android:inputType="textMultiLine"
             android:paddingStart="8dp"
-            android:minLines="3"
             android:textColorHint="#8D6E63"
             android:layout_marginBottom="16dp" />
 

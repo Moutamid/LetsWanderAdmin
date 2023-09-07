@@ -49,6 +49,7 @@
             android:layout_height="wrap_content"
             android:hint="Enter title"
             android:inputType="text"
+            android:paddingStart="8dp"
             android:background="@color/secondary"
             android:minHeight="48dp"
             android:textColorHint="#8D6E63"
@@ -80,6 +81,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:hint="Latitude"
+                android:paddingStart="8dp"
                 android:background="@color/secondary"
                 android:inputType="numberDecimal"
                 android:minHeight="48dp"
@@ -91,6 +93,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:paddingStart="8dp"
                 android:hint="Longitude"
                 android:background="@color/secondary"
                 android:inputType="numberDecimal"
@@ -118,11 +121,13 @@
             android:hint="Enter description"
             android:background="@color/secondary"
             android:textSize="12sp"
+            android:paddingTop="8dp"
             android:scrollbars="vertical"
             android:inputType="textMultiLine"
-            android:minLines="3"
+            android:paddingStart="8dp"
             android:textColorHint="#8D6E63"
-            android:layout_marginBottom="16dp" />
+            android:layout_marginBottom="16dp"
+            android:gravity="top|start"/>
 
         <RelativeLayout
             android:layout_width="match_parent"
