@@ -40,12 +40,12 @@ public class AddNewActivity extends AppCompatActivity {
                         double latitude = Double.parseDouble(latitudeStr);
                         double longitude = Double.parseDouble(longitudeStr);
 
-                        addLocation location = new addLocation(latitude, longitude, title, description, isStar);
 
                         DatabaseReference markersRef = Constants.databaseReference().child("Markers");
 
                         DatabaseReference newLocationRef = markersRef.push();
                         String locationKey = newLocationRef.getKey();
+                        addLocation location = new addLocation(locationKey, latitude, longitude, title, description, isStar);
 
                         newLocationRef.setValue(location);
 

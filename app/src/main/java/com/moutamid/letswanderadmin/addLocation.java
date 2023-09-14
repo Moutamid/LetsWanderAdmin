@@ -8,7 +8,8 @@ public class addLocation {
     private String description;
     private Boolean star;
 
-    public addLocation(double latitude, double longitude, String title, String description, Boolean star) {
+    public addLocation(String id, double latitude, double longitude, String title, String description, Boolean star) {
+        this.id = id;
         this.latitude = latitude;
         this.longitude = longitude;
         this.title = title;
