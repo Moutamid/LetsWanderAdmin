@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void switchToViewActivity(View view)
     {
-        startActivity(new Intent(this, SplashActivity.class));
+        startActivity(new Intent(this, ViewActivity.class));
     }
 
     public void switchToAddNewActivity(View view)

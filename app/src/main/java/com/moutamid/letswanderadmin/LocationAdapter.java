@@ -8,6 +8,7 @@
     import android.view.View;
     import android.view.ViewGroup;
     import android.widget.Button;
+    import android.widget.ImageButton;
     import android.widget.ImageView;
     import android.widget.TextView;
     import android.widget.Toast;
@@ -39,58 +40,62 @@
 
         @Override
         public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-            addLocation location = locationList.get(position);
 
-            holder.titleTextView.setText(location.getTitle());
-            holder.locationTextView.setText("Location: " + location.getLatitude() + ", " + location.getLongitude());
-            holder.descriptionTextView.setText("Description: " + location.getDescription());
+            if (holder.getAbsoluteAdapterPosition() >= locationList.size()-1) {
+                holder.itemView.setVisibility(View.INVISIBLE);
+            } else {
+                addLocation location = locationList.get(holder.getAbsoluteAdapterPosition());
 
-            if (location.getStar() != null && location.getStar()) {
-                holder.starIcon.setVisibility(View.VISIBLE);
-            }
+                holder.titleTextView.setText(location.getTitle());
+                holder.locationTextView.setText("Location: " + location.getLatitude() + ", " + location.getLongitude());
+                holder.descriptionTextView.setText("Description: " + location.getDescription());
 
-            holder.editButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(context, EditActivity.class);
-                    intent.putExtra("id", location.getId());
-                    context.startActivity(intent);
+                if (location.getStar() != null && location.getStar()) {
+                    holder.starIcon.setVisibility(View.VISIBLE);
                 }
-            });
 
-            holder.deleteButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                    builder.setMessage("Are you sure you want to delete this location?")
-                            .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    String id = location.getId();
-                                    if (id != null) {
-                                        DatabaseReference locationRef = Constants.databaseReference().child("Markers").child(id);
+                holder.editButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(context, EditActivity.class);
+                        intent.putExtra("id", location.getId());
+                        context.startActivity(intent);
+                    }
+                });
+                holder.deleteButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                        builder.setMessage("Are you sure you want to delete this location?")
+                                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        String id = location.getId();
+                                        if (id != null) {
+                                            DatabaseReference locationRef = Constants.databaseReference().child("Markers").child(id);
 
-                                        locationRef.removeValue().addOnCompleteListener(task -> {
-                                            if (task.isSuccessful()) {
-                                                Toast.makeText(context, "Location deleted", Toast.LENGTH_SHORT).show();
-                                            } else {
-                                                Toast.makeText(context, "Failed to delete location", Toast.LENGTH_SHORT).show();
-                                            }
-                                        });
-                                    } else {
-                                        Toast.makeText(context, "Marker ID is missing", Toast.LENGTH_SHORT).show();
+                                            locationRef.removeValue().addOnCompleteListener(task -> {
+                                                if (task.isSuccessful()) {
+                                                    Toast.makeText(context, "Location deleted", Toast.LENGTH_SHORT).show();
+                                                } else {
+                                                    Toast.makeText(context, "Failed to delete location", Toast.LENGTH_SHORT).show();
+                                                }
+                                            });
+                                        } else {
+                                            Toast.makeText(context, "Marker ID is missing", Toast.LENGTH_SHORT).show();
+                                        }
                                     }
-                                }
-                            })
-                            .setNegativeButton("No", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    dialog.dismiss();
-                                }
-                            })
-                            .show();
-                }
-            });
+                                })
+                                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        dialog.dismiss();
+                                    }
+                                })
+                                .show();
+                    }
+                });
+            }
         }
 
             @Override
@@ -105,7 +110,7 @@
             private TextView descriptionTextView;
             private ImageView starIcon;
             private Button editButton;
-            private Button deleteButton;
+            private ImageButton deleteButton;
 
             public ViewHolder(@NonNull View itemView) {
                 super(itemView);
