@@ -23,11 +23,25 @@
             android:textStyle="bold" />
     </androidx.appcompat.widget.Toolbar>
 
+
+    <EditText
+        android:id="@+id/search"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/toolbar"
+        android:padding="12dp"
+        android:backgroundTint="@color/grey"
+        android:background="@drawable/background"
+        android:hint="Search by name"
+        android:drawablePadding="12dp"
+        android:drawableStart="@drawable/baseline_search_24"
+        android:layout_margin="12dp" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewLocations"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/toolbar"
+        android:layout_below="@id/search"
         android:clipToPadding="false"
         android:scrollbars="none"
         tools:listitem="@layout/item_location"/>

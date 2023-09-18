@@ -8,6 +8,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -30,6 +32,8 @@ public class ViewActivity extends AppCompatActivity {
     private String id;
     ProgressDialog progressDialog;
 
+    LocationAdapter adapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,6 +53,24 @@ public class ViewActivity extends AppCompatActivity {
         ExtendedFloatingActionButton add = findViewById(R.id.add);
 
         add.setOnClickListener(v -> startActivity(new Intent(this, AddNewActivity.class)));
+        EditText et = findViewById(R.id.search);
+
+        et.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                adapter.getFilter().filter(s);
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
 
         locationRef.addValueEventListener(new ValueEventListener() {
             @Override
@@ -63,7 +85,7 @@ public class ViewActivity extends AppCompatActivity {
                     }
                 }
                 locationList.add(new addLocation());
-                LocationAdapter adapter = new LocationAdapter(locationList, ViewActivity.this);
+                adapter = new LocationAdapter(locationList, ViewActivity.this);
                 recyclerView.setAdapter(adapter);
                 progressDialog.dismiss();
             }
