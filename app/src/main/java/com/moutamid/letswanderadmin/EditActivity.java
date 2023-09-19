@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.InputFilter;
+import android.text.Spanned;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -53,6 +55,10 @@ public class EditActivity extends AppCompatActivity {
         editTextDescription = findViewById(R.id.editTextDescription);
         switchIsStar = findViewById(R.id.switchIsStar);
         submitButton = findViewById(R.id.submitButton);
+
+        setSixDigitDecimalInputFilter(editTextLatitude);
+        setSixDigitDecimalInputFilter(editTextLongitude);
+
 
         DatabaseReference locationRef = Constants.databaseReference().child("Markers").child(id);
         locationRef.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -130,4 +136,25 @@ public class EditActivity extends AppCompatActivity {
             }
         });
     }
+
+    public void setSixDigitDecimalInputFilter(EditText editText) {
+        final String decimalPattern = "^[0-9]{0,6}+(\\.[0-9]{0,6})?$"; // Regular expression for up to 6 digits before and after the decimal point
+
+        InputFilter inputFilter = new InputFilter() {
+            @Override
+            public CharSequence filter(CharSequence source, int start, int end, Spanned dest, int dstart, int dend) {
+                String newText = dest.toString().substring(0, dstart) +
+                        source.toString() +
+                        dest.toString().substring(dend);
+                if (newText.matches(decimalPattern)) {
+                    return null; // Accept the input
+                } else {
+                    return ""; // Reject the input
+                }
+            }
+        };
+
+        editText.setFilters(new InputFilter[]{inputFilter});
+    }
+
 }

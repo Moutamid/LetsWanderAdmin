@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.InputFilter;
+import android.text.Spanned;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -17,6 +19,7 @@ public class AddNewActivity extends AppCompatActivity {
 
     Button submitButton;
     ProgressDialog progressDialog;
+    EditText latitude, longitude;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,12 +32,18 @@ public class AddNewActivity extends AppCompatActivity {
 
         submitButton = findViewById(R.id.submitButton);
 
+        latitude = findViewById(R.id.editTextLatitude);
+        longitude = findViewById(R.id.editTextLongitude);
+
+        setSixDigitDecimalInputFilter(latitude);
+        setSixDigitDecimalInputFilter(longitude);
+
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String title = ((EditText) findViewById(R.id.editTextTitle)).getText().toString();
-                String latitudeStr = ((EditText) findViewById(R.id.editTextLatitude)).getText().toString();
-                String longitudeStr = ((EditText) findViewById(R.id.editTextLongitude)).getText().toString();
+                String latitudeStr = latitude.getText().toString();
+                String longitudeStr = longitude.getText().toString();
                 String description = ((EditText) findViewById(R.id.editTextDescription)).getText().toString();
                 boolean isStar = ((Switch) findViewById(R.id.switchIsStar)).isChecked();
 
@@ -66,6 +75,26 @@ public class AddNewActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    public void setSixDigitDecimalInputFilter(EditText editText) {
+        final String decimalPattern = "^[0-9]{0,6}+(\\.[0-9]{0,6})?$"; // Regular expression for up to 6 digits before and after the decimal point
+
+        InputFilter inputFilter = new InputFilter() {
+            @Override
+            public CharSequence filter(CharSequence source, int start, int end, Spanned dest, int dstart, int dend) {
+                String newText = dest.toString().substring(0, dstart) +
+                        source.toString() +
+                        dest.toString().substring(dend);
+                if (newText.matches(decimalPattern)) {
+                    return null; // Accept the input
+                } else {
+                    return ""; // Reject the input
+                }
+            }
+        };
+
+        editText.setFilters(new InputFilter[]{inputFilter});
     }
 
     private void clearInputFields() {
