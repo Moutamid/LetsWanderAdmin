@@ -138,7 +138,7 @@ public class EditActivity extends AppCompatActivity {
     }
 
     public void setSixDigitDecimalInputFilter(EditText editText) {
-        final String decimalPattern = "^[0-9]{0,6}+(\\.[0-9]{0,6})?$"; // Regular expression for up to 6 digits before and after the decimal point
+        final String decimalPattern = "^-?[0-9]{0,6}(\\.[0-9]{0,6})?$";
 
         InputFilter inputFilter = new InputFilter() {
             @Override

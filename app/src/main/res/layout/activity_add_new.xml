@@ -83,7 +83,7 @@
                     android:padding="8dp"
                     android:background="@drawable/background"
                     android:backgroundTint="@color/grey"
-                    android:inputType="numberDecimal"
+                    android:inputType="numberDecimal|numberSigned"
                     android:minHeight="48dp"
                     android:layout_marginEnd="5dp" />
 
@@ -96,7 +96,7 @@
                     android:padding="8dp"
                     android:background="@drawable/background"
                     android:backgroundTint="@color/grey"
-                    android:inputType="numberDecimal"
+                    android:inputType="numberSigned|numberDecimal"
                     android:minHeight="48dp"
                     android:layout_marginStart="5dp" />
             </LinearLayout>
