@@ -38,7 +38,7 @@ public class ViewActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view);
-        Constants.checkApp(this);
+       // Constants.checkApp(this);
 
         progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Please Wait...");
